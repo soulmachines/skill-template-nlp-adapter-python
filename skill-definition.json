@@ -1,0 +1,28 @@
+{
+  "name": "Dev Cafe Demo Skill",
+  "summary": "One line summary of skill",
+  "description": "Brief description of the skill",
+  "status": "ACTIVE",
+  "serviceProvider": "SKILL_API",
+  "endpointInitialize": "https://dev-cafe.loca.lt/init",
+  "endpointSession": "https://dev-cafe.loca.lt/session",
+  "endpointExecute": "https://dev-cafe.loca.lt/execute",
+  "endpointEndProject": "https://dev-cafe.loca.lt/delete",
+  "config": {
+    "skillType": "BASE_CORPUS",
+    "configMeta": [
+      {
+        "label": "Third Party Credentials 1",
+        "name": "first_credentials",
+        "required": true,
+        "type": "TEXT"
+      },
+      {
+        "label": "Third Party Credentials 2",
+        "name": "second_credentials",
+        "required": true,
+        "type": "PASSWORD"
+      }
+    ]
+  }
+}
