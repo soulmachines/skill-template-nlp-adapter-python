@@ -1,0 +1,28 @@
+{
+  "name": "My NLP Adapter Skill",
+  "summary": "One line summary of skill",
+  "description": "Brief description of the skill",
+  "status": "ACTIVE",
+  "serviceProvider": "SKILL_API",
+  "endpointInitialize": "https://your-domain-here/init",
+  "endpointSession": "https://your-domain-here/session",
+  "endpointExecute": "https://your-domain-here/execute",
+  "endpointEndProject": "https://your-domain-here/delete",
+  "config": {
+    "skillType": "BASE_CORPUS",
+    "configMeta": [
+      {
+        "label": "Third Party Credentials 1",
+        "name": "first_credentials",
+        "required": true,
+        "type": "TEXT"
+      },
+      {
+        "label": "Third Party Credentials 2",
+        "name": "second_credentials",
+        "required": true,
+        "type": "PASSWORD"
+      }
+    ]
+  }
+}
