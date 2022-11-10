@@ -101,12 +101,13 @@ async def execute(request: ExecuteRequest) -> ExecuteResponse:
     fake_nlp_service = FakeNLPService(*credentials)
 
     # 4. Extract relevant response data from the third party service
-    spoken_response, cards = fake_nlp_service.send(user_input)
+    spoken_response, cards, intent, annotations = fake_nlp_service.send(user_input)
 
     # 5. Construct SM-formatted response body
-    variables = Variables(public=cards)
+    variables = Variables(public=cards, **annotations)
 
     output = Output(
+        intent=intent,
         text=spoken_response,
         variables=variables
     )
