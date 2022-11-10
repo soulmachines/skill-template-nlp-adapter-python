@@ -11,6 +11,7 @@ from smskillsdk.models.api import (
     ExecuteResponse,
     Output,
     Variables,
+    Intent,
 )
 
 router = APIRouter(
@@ -104,9 +105,25 @@ async def execute(request: ExecuteRequest) -> ExecuteResponse:
     spoken_response, cards = fake_nlp_service.send(user_input)
 
     # 5. Construct SM-formatted response body
-    variables = Variables(public=cards)
+
+    # 5a. Add your Intent if required
+    intent = Intent(
+        name="Welcome",
+        confidence=1,
+    )
+  
+    # 5b. Add your conversation annotations if you want to see metrics for your Skills on Studio Insights
+    annotations = {
+        "conv_tag": "Skill.BaseTemplate", 
+        "conv_id": intent.name, 
+        "conv_intent": intent.name, 
+        "conv_type": "Entry",
+    }
+
+    variables = Variables(public=cards, **annotations)
 
     output = Output(
+        intent=intent,
         text=spoken_response,
         variables=variables
     )
