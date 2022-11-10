@@ -34,7 +34,7 @@ async def init(request: InitRequest):
     skill_config = request.config
 
     # 1a. Extract relevant credentials from config
-    credentials = itemgetter("firstCredentials", "secondCredentials")(skill_config)
+    credentials = itemgetter("first_credentials", "second_credentials")(skill_config)
 
     # 2. Make request to third party service to initialize 
     # any configuration, data storage, or pre-training on the NLP service before executing this Skill
@@ -57,7 +57,7 @@ async def session(request: SessionRequest) -> SessionResponse:
     session_id, skill_config, skill_memory = attrgetter("sessionId", "config", "memory")(request)
 
     # 1a. Extract relevant credentials from config
-    credentials = itemgetter("firstCredentials", "secondCredentials")(skill_config)
+    credentials = itemgetter("first_credentials", "second_credentials")(skill_config)
 
     # 2. Make request to third party service to initialize session-specific resources
     fake_nlp_service = FakeNLPService(*credentials)
@@ -86,10 +86,10 @@ async def execute(request: ExecuteRequest) -> ExecuteResponse:
     """
 
     # 1. Extract relevant data
-    skill_config, skill_memory = attrgetter("config", "memory")(request)
+    skill_config, skill_memory, context = attrgetter("config", "memory", "context")(request)
 
     # 1a. when using stateless skill, extract relevant credentials from config
-    # credentials = itemgetter("firstCredentials", "secondCredentials")(skill_config)
+    # credentials = itemgetter("first_credentials", "second_credentials")(skill_config)
 
     # 1b. when using stateful skill, extract relevant credentials elsewhere (eg. memory) as config will not be present here
     _, credentials = get_memory_value(memories=skill_memory, key="credentials")
