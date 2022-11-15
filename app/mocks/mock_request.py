@@ -4,7 +4,7 @@ and should be replaced with the actual HTTP calls when implementing.
 """
 
 from typing import List
-from smskillsdk.models.api import Memory, MemoryScope
+from smskillsdk.models.api import Memory, MemoryScope, Intent
 
 
 def mock_init_actions():
@@ -42,8 +42,10 @@ def mock_get_response(user_input: str):
 
     print(f"User said: {user_input}")
 
+    # Response to be spoken by your Digital Person
     response = "Hello! @showcards(card) Here is a kitten."
 
+    # Add your Cards as required
     cards = {
         "card": {
             "type": "image",
@@ -54,5 +56,18 @@ def mock_get_response(user_input: str):
         },
     }
 
-    
-    return response, cards
+    # Add your Intent as required
+    intent = Intent(
+        name="Welcome",
+        confidence=1,
+    )
+  
+    # If applicable, add your conversation annotations to see metrics for your Skill on Studio Insights
+    annotations = {
+        "conv_tag": "Skill.BaseTemplate", 
+        "conv_id": intent.name, 
+        "conv_intent": intent.name, 
+        "conv_type": "Entry",
+    }
+
+    return response, cards, intent, annotations
