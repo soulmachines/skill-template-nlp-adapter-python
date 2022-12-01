@@ -1,4 +1,3 @@
-from typing import List
 from fastapi import APIRouter
 from operator import itemgetter, attrgetter
 from smskillsdk.utils.memory import get_memory_value, set_memory_value
